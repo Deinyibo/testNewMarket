@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform Dashboard — NewMart</title>
+  <meta name="description" content="New Technologies platform overview for NewMart marketplace.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="kira-kit/kira-motion.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main>
+    <section class="section" id="admin">
+      <div class="container">
+        <div id="guest-message" style="display:none;">
+          <div class="empty-state">
+            <h1 class="section-title">Platform admin access required</h1>
+            <p>Log in with an admin account to view this dashboard.</p>
+            <a href="sell.html#demo" class="btn btn-primary" style="margin-top:16px;">See demo logins</a>
+          </div>
+        </div>
+
+        <div id="admin-content">
+          <h1 class="section-title" data-motion="fade-up">Platform overview</h1>
+          <p class="section-lead" data-motion="fade-up">New Technologies' marketplace health view.</p>
+          <div class="stat-grid" data-motion="fade-up" data-motion-stagger="80" id="platform-stats"></div>
+
+          <div class="panel" data-motion="fade-up">
+            <h3>Trend charts</h3>
+            <div class="card-grid" id="trend-charts">
+              <div class="stat-card"><h4>Sales</h4><div style="height:120px;background:linear-gradient(to top, rgba(18,41,107,0.1) 60%, transparent 60%);border-radius:var(--radius-card);margin-top:10px;"></div></div>
+              <div class="stat-card"><h4>New stores</h4><div style="height:120px;background:linear-gradient(to top, rgba(18,41,107,0.1) 40%, transparent 40%);border-radius:var(--radius-card);margin-top:10px;"></div></div>
+              <div class="stat-card"><h4>Buyer sign-ups</h4><div style="height:120px;background:linear-gradient(to top, rgba(18,41,107,0.1) 70%, transparent 70%);border-radius:var(--radius-card);margin-top:10px;"></div></div>
+            </div>
+          </div>
+
+          <div class="panel" data-motion="fade-up" id="stores-panel">
+            <h3>Stores</h3>
+            <div class="table-wrap" style="overflow-x:auto;">
+              <table class="data-table" id="stores-table">
+                <thead><tr><th>Store</th><th>Owner</th><th>Status</th><th>GMV</th><th>Dispute rate</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel" data-motion="fade-up" id="disputes-panel">
+            <h3>Disputes</h3>
+            <div id="disputes-list"></div>
+          </div>
+
+          <div class="panel" data-motion="fade-up" id="invoices-panel">
+            <h3>Commission & POD invoices</h3>
+            <div class="table-wrap" style="overflow-x:auto;">
+              <table class="data-table" id="admin-invoices-table">
+                <thead><tr><th>Store</th><th>Type</th><th>Amount</th><th>Due</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="kira-kit/gsap.min.js"></script>
+  <script src="kira-kit/ScrollTrigger.min.js"></script>
+  <script src="kira-kit/kira-motion.js" defer></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages/admin.js"></script>
+</body>
+</html>

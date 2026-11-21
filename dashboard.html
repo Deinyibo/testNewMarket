@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard — NewMart</title>
+  <meta name="description" content="Manage your NewMart storefront, products, orders, wallet and team.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="kira-kit/kira-motion.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main>
+    <section class="section" id="dashboard">
+      <div class="container">
+        <div id="guest-message" style="display:none;">
+          <div class="empty-state">
+            <h1 class="section-title">Log in to view your dashboard</h1>
+            <p>Use a demo account or sign in with your store credentials.</p>
+            <a href="sell.html#demo" class="btn btn-primary" style="margin-top:16px;">See demo logins</a>
+          </div>
+        </div>
+
+        <div class="dashboard-grid" id="dashboard-content">
+          <aside class="dashboard-sidebar" data-motion="fade-up">
+            <h3 style="margin-bottom:12px;font-size:1.1rem;" id="sidebar-store">Your store</h3>
+            <nav id="dashboard-nav">
+              <a href="#overview" class="active" data-tab="overview">Overview</a>
+              <a href="#products" data-tab="products">Products</a>
+              <a href="#orders" data-tab="orders">Orders</a>
+              <a href="#wallet" data-tab="wallet">Wallet & payouts</a>
+              <a href="#team" data-tab="team" id="nav-team">Your team</a>
+            </nav>
+          </aside>
+
+          <div class="dashboard-main">
+            <!-- Overview -->
+            <div id="tab-overview" class="tab-panel">
+              <h1 class="section-title" id="dash-greeting">Good morning</h1>
+              <p class="section-lead" id="dash-role">Manage your store from here.</p>
+              <div class="stat-grid" data-motion="fade-up" data-motion-stagger="80" id="overview-stats"></div>
+              <div class="panel" data-motion="fade-up">
+                <h3>Quick actions</h3>
+                <div class="flex flex-wrap gap-2">
+                  <button class="btn btn-primary" id="qa-add-product">Add product</button>
+                  <button class="btn btn-secondary" id="qa-view-orders">View orders</button>
+                  <button class="btn btn-secondary" id="qa-withdraw">Withdraw</button>
+                </div>
+              </div>
+              <div id="overview-alerts" data-motion="fade-up"></div>
+            </div>
+
+            <!-- Products -->
+            <div id="tab-products" class="tab-panel hidden">
+              <div class="flex justify-between items-center flex-wrap gap-2" style="margin-bottom:1.5em;">
+                <div>
+                  <h2 class="section-title">Products</h2>
+                  <p class="section-lead mt-0">Add and edit products with photos, ₦ price and stock count.</p>
+                </div>
+                <button class="btn btn-primary" id="btn-add-product">Add product</button>
+              </div>
+              <div class="panel" data-motion="fade-up">
+                <h3>Low stock</h3>
+                <div id="low-stock-list"></div>
+              </div>
+              <div class="panel" data-motion="fade-up">
+                <h3>All products</h3>
+                <div class="table-wrap" style="overflow-x:auto;">
+                  <table class="data-table" id="products-table">
+                    <thead><tr><th>Product</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Orders -->
+            <div id="tab-orders" class="tab-panel hidden">
+              <h2 class="section-title">Orders</h2>
+              <p class="section-lead">Update a status in one tap and buyers see progress instantly.</p>
+              <div id="orders-board" data-motion="fade-up" data-motion-stagger="80"></div>
+            </div>
+
+            <!-- Wallet -->
+            <div id="tab-wallet" class="tab-panel hidden">
+              <h2 class="section-title">Wallet & payouts</h2>
+              <p class="section-lead">Released funds land in your wallet minus the 5% commission.</p>
+              <div class="stat-grid" data-motion="fade-up" data-motion-stagger="80" id="wallet-stats"></div>
+              <div class="panel" data-motion="fade-up">
+                <h3>Withdraw to bank</h3>
+                <form id="withdraw-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="withdraw-amount">Amount (₦)</label>
+                      <input type="number" id="withdraw-amount" min="1000" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="withdraw-account">Bank account</label>
+                      <input type="text" id="withdraw-account" placeholder="Account number / bank name" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" id="btn-withdraw">Withdraw</button>
+                </form>
+              </div>
+              <div class="panel" data-motion="fade-up">
+                <h3>Pay-on-delivery invoices</h3>
+                <div class="table-wrap" style="overflow-x:auto;">
+                  <table class="data-table" id="invoices-table">
+                    <thead><tr><th>Period</th><th>Amount</th><th>Due</th><th>Status</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team -->
+            <div id="tab-team" class="tab-panel hidden">
+              <h2 class="section-title">Your team</h2>
+              <p class="section-lead">Invite staff by email. Owner: products, staff and payouts. Manager: products and orders. Sales rep: orders only.</p>
+              <div class="panel" data-motion="fade-up">
+                <h3>Invite team member</h3>
+                <form id="invite-form">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="invite-name">Name</label>
+                      <input type="text" id="invite-name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="invite-email">Email</label>
+                      <input type="email" id="invite-email" required>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="invite-role">Role</label>
+                      <select id="invite-role" required>
+                        <option value="manager">Manager</option>
+                        <option value="sales">Sales rep</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="invite-password">Password</label>
+                      <input type="password" id="invite-password" required>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Send invite</button>
+                </form>
+              </div>
+              <div class="panel" data-motion="fade-up">
+                <h3>Team members</h3>
+                <div class="table-wrap" style="overflow-x:auto;">
+                  <table class="data-table" id="team-table">
+                    <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="kira-kit/gsap.min.js"></script>
+  <script src="kira-kit/ScrollTrigger.min.js"></script>
+  <script src="kira-kit/kira-motion.js" defer></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+</body>
+</html>
