@@ -1,0 +1,73 @@
+/*! kira-motion 1.0.0 | Kira Code motion kit | MIT */
+/* Hidden states apply only once kira-motion.js has run (html.kira-motion), so a
+   page whose script fails still shows everything. */
+
+:root {
+  --km-duration: 700ms;
+  --km-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --km-distance: 28px;
+}
+
+html.kira-motion [data-motion] {
+  opacity: 0;
+  transition:
+    opacity var(--km-duration) var(--km-ease),
+    transform var(--km-duration) var(--km-ease),
+    filter var(--km-duration) var(--km-ease);
+  transition-delay: var(--km-delay, 0ms);
+  will-change: opacity, transform;
+}
+html.kira-motion [data-motion='fade-up'] { transform: translate3d(0, var(--km-distance), 0); }
+html.kira-motion [data-motion='fade-down'] { transform: translate3d(0, calc(var(--km-distance) * -1), 0); }
+html.kira-motion [data-motion='fade-left'] { transform: translate3d(var(--km-distance), 0, 0); }
+html.kira-motion [data-motion='fade-right'] { transform: translate3d(calc(var(--km-distance) * -1), 0, 0); }
+html.kira-motion [data-motion='zoom'] { transform: scale(0.94); }
+html.kira-motion [data-motion='blur'] { filter: blur(10px); }
+html.kira-motion [data-motion].is-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Split headings: the element stays visible, its pieces reveal in turn. */
+html.kira-motion [data-split][data-motion] { opacity: 1; transform: none; filter: none; }
+[data-split] .km-piece { display: inline-block; }
+html.kira-motion [data-split][data-motion] .km-piece {
+  opacity: 0;
+  transform: translate3d(0, 0.6em, 0);
+  transition:
+    opacity 600ms var(--km-ease),
+    transform 600ms var(--km-ease);
+  transition-delay: calc(var(--km-delay, 0ms) + var(--km-i, 0) * 40ms);
+}
+html.kira-motion [data-split][data-motion].is-in .km-piece { opacity: 1; transform: none; }
+
+[data-marquee] { overflow: hidden; }
+.km-marquee-row {
+  display: flex;
+  width: max-content;
+  animation: km-marquee var(--km-marquee-duration, 30s) linear infinite;
+}
+.km-marquee-track { display: flex; flex-shrink: 0; }
+[data-marquee]:hover .km-marquee-row { animation-play-state: paused; }
+@keyframes km-marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+[data-progress] {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+[data-parallax] { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.kira-motion [data-motion],
+  html.kira-motion [data-split][data-motion] .km-piece {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .km-marquee-row { animation: none; }
+}
